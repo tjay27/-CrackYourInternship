@@ -1,0 +1,59 @@
+class Solution {
+public:
+    //make pairs approach
+    /*static bool cmp(pair<int,int> a, pair<int,int> b){
+        return a.first<b.first;
+    }
+    vector<int> twoSum(vector<int>& arr, int k) {
+        vector<pair<int,int>> nums;
+        for(int i=0;i<arr.size();i++){
+            nums.push_back({arr[i],i});
+        }
+        sort(nums.begin(),nums.end(),cmp);
+        vector<int> ans;
+        int i=0;//start ptr
+        int j=nums.size()-1;//end ptr
+        
+        while(i<j){
+           // cout<<nums[i].first<<' '<<nums[j].first<<endl;
+            //cout<<i<<' '<<j<<endl;
+            int sum=nums[i].first+nums[j].first;
+            if(sum==k){
+                ans.push_back(nums[i].second);
+                ans.push_back(nums[j].second);
+                return ans;
+            }
+            else if(sum<k)
+                i++;
+            else 
+                j--;
+            
+        }
+        
+        return ans;
+    }*/
+    
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> duplicate, ans;
+        duplicate=nums;
+        int n=nums.size();
+        int i=0;
+        int j=n-1;
+        sort(nums.begin(),nums.end());
+        while(i<j){
+            int sum=nums[i]+nums[j];
+            if(target==sum){
+                for(int k=0;k<n;k++){
+                    if(nums[i]==duplicate[k]) ans.push_back(k);
+                    else if (nums[j]==duplicate[k]) ans.push_back(k);
+                }
+                break;
+            }
+            else if(target>sum) i++;
+            else if(sum > target) j--;
+        }
+        
+        
+        return ans;
+    }
+};
